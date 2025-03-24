@@ -1,13 +1,13 @@
 const express = require('express')
 const router = express.Router()
-// require middleware if needed
+const authenticateAdmin = require('../middlewares/authMiddlewares')
 
 const { getProducts, getById, createProduct, deleteProduct, editProduct, reserveProduct } = require('../controllers/productController') // require each controller
 
 router.get('/products', getProducts)
 router.get('/products/:_id', getById)
 
-// All under this line need a middleware (router.use(authMiddlewares))
+router.use(authenticateAdmin)
 
 router.post('/admin/create', createProduct) // Add a new item to the DB
 router.put('/admin/edit/:_id', editProduct) // Edit a product from the DB

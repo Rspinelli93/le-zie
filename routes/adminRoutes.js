@@ -1,10 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-const { login, logout, register } = require('../controllers/adminController')
+const { getAdmin } = require('../controllers/adminController')
 
-router.post('/admin/login', login)
-router.post('/admin/register', register)
-router.delete('/admin/logout', logout)
+router.post('/admin/login', getAdmin)
 
 module.exports = router

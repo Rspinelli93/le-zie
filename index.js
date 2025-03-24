@@ -1,8 +1,15 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const PORT = 3210;
+const bodyParser = require('body-parser');
+const cors = require('cors');   
 const productRoutes = require('./routes/productsRoutes');
 const adminRoutes = require('./routes/adminRoutes')
+
+app.use(cors()); 
+app.use(bodyParser.json());  
+
 
 const { dbConnection } = require('./config/mongoDB');
 dbConnection();

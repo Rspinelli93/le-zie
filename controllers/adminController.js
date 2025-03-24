@@ -1,31 +1,31 @@
-const Admin = require("../models/Admin"); 
-const mongoose = require("mongoose");
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
-const login = async (req, res) => {
+const getAdmin = async (req, res) => {
     const { email, password } = req.body;
-    try {
-        const admin = await Admin.create({ email, password })
 
-    } catch (error) {
-        
-    }
-}
-const logout = async (req, res) => {
-    
-}
-const register = async (req, res) => {
-        const { email, password } = req.body;
     try {
-        const admin = await Admin.create({ email, password })
-        res.status(201).json(admin);
-    } catch (error) {
-        console.log(error)
-        res.status(400).send('Error, user not created')
-    }
-}
+        const ADMIN_EMAIL = process.env.ADMIN_EMAIL;
+        const ADMIN_HASHED_PASSWORD = process.env.ADMIN_PASSWORD;
+        const SECRET_KEY = process.env.JWT_SECRET;
 
-module.exports = {
-    login,
-    logout,
-    register
-}
+        if (email !== ADMIN_EMAIL) {
+            return res.status(401).json({ message: "Unauthorized: Invalid email" });
+        }
+
+        const isPasswordValid = await bcrypt.compare(password, ADMIN_HASHED_PASSWORD);
+        if (!isPasswordValid) {
+            return res.status(401).json({ message: "Unauthorized: Invalid password" });
+        }
+
+        const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });
+        return res.status(200).json({ message: "Login successful", token });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Server error" });
+    }
+};
+
+module.exports = { getAdmin };
+

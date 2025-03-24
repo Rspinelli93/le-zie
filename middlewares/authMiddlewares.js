@@ -1,29 +1,25 @@
 const jwt = require('jsonwebtoken');
-const { hashedSecret } = require('../crypto/config');
 
-// - Middleware que verifica la validez del token almacenado en la sesión.
+const authenticateAdmin = (req, res, next) => {
+    let token = req.header("Authorization");
 
-function verifyToken(req, res, next) {
-
-    const token = req.session.token; //se mete el token guardado dentro del usuario
-
-    if (!token) {
-      return res.status(401).json({ message: 'No token avbailable' });
+    if (token && token.startsWith("Bearer ")) {
+        token = token.split(" ")[1];
+    } else {
+        token = req.query.token;
     }
 
-    jwt.verify(token, hashedSecret, (err, decoded) => { //y aca lo verificamos
-      if (err) {
-        return res
-          .status(401)
-          .json({ message: 'Token inválido', error: err.message });
-      }
-      
-      // Attach user information from the token to the request object
-      req.user = decoded.user;
-      next();
-  });
-}
+    if (!token) {
+        return res.status(403).json({ message: "Access denied. No token provided." });
+    }
+    try {
+        const SECRET_KEY = process.env.JWT_SECRET;
+        const decoded = jwt.verify(token, SECRET_KEY);
+        req.admin = decoded;
+        next();
+    } catch (error) {
+        return res.status(401).json({ message: "Invalid or expired token" });
+    }
+};
 
-
-
-module.exports = { verifyToken }
+module.exports = authenticateAdmin;
