@@ -72,7 +72,7 @@ const editProduct = async (req, res) => {
         res.status(500).json({ message: "There was a problem updating the product" });
     }
 };
-const reserveProduct = async (req, res) => {
+const soldProduct = async (req, res) => {
     try {
         const id = req.params._id;
 
@@ -85,13 +85,13 @@ const reserveProduct = async (req, res) => {
             return res.status(404).json({ message: "Product not found" });
         }
 
-        product.reserved = !product.reserved;
+        product.sold = !product.sold;
         await product.save();
         res.status(200).json(product);
         
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: "There was a problem reserving the product" });
+        res.status(500).json({ message: "There was a problem marking the product as sold" });
     }
 };
 const deleteProduct = async (req, res) => {
@@ -116,5 +116,5 @@ module.exports = {
     createProduct,
     deleteProduct,
     editProduct,
-    reserveProduct
+    soldProduct
 }

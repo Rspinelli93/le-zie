@@ -1,68 +1,88 @@
-# Second-Hand Shop Backend
+# 🧵 LE ZIE - Vintage Clothing Web App – Backend
 
-This is the backend for a second-hand shop's online store, built using Node.js and MongoDB. It provides an API for managing clothing items, with admin-restricted routes secured via JWT authentication.
-
-## Features
-
-- Store and manage clothing items in a MongoDB database.
-- Public API to fetch available clothing for customers.
-- Admin routes for managing inventory (add, update, delete items).
-- Secure authentication using JWT for admin access.
-
-## Tech Stack
-
-- **Node.js** (Runtime environment)
-- **Express.js** (Web framework)
-- **MongoDB** (Database)
-- **Mongoose** (ODM for MongoDB)
-- **JWT** (Authentication)
-
-## Installation
-
-1. Clone the repository:
-   ```sh
-   git clone <repo_url>
-   cd backend
-   ```
-2. Install dependencies:
-   ```sh
-   npm install
-   ```
-3. Set up environment variables:
-   Create a `.env` file in the root directory and add:
-   ```env
-   MONGO_URI=<your_mongodb_connection_string>
-   JWT_SECRET=<your_secret_key>
-   PORT=5000
-   ```
-4. Start the server:
-   ```sh
-   npm start
-   ```
-
-## API Endpoints
-
-### Public Routes
-
-- `GET /clothes` - Fetch all available clothing items.
-
-### Admin Routes (JWT Protected)
-
-- `POST /admin/clothes` - Add a new clothing item.
-- `PUT /admin/clothes/:id` - Update clothing details.
-- `DELETE /admin/clothes/:id` - Remove a clothing item.
-
-## Authentication
-
-Admins must log in and use the provided JWT token to access protected routes.
-
-## License
-
-This project is licensed under the MIT License.
+This is the **backend** for the LE ZIE vintage clothing web application, built with **Node.js**, **Express**, and **MongoDB**. It provides a set of API endpoints for both public users and authenticated admins, supporting full inventory management and dynamic content delivery to the frontend.
 
 ---
 
-For any issues or contributions, feel free to create a pull request or open an issue!
+## ✨ Features
 
+- Store and manage vintage clothing items in a MongoDB database
+- Public API to fetch all or individual products
+- Admin-only routes to add, edit, delete, or reserve items
+- Secure JWT authentication system for admin login and protected access
 
+---
 
+## 🧰 Tech Stack
+
+- **Node.js** – Runtime environment  
+- **Express.js** – Backend framework  
+- **MongoDB** – NoSQL database  
+- **Mongoose** – ODM for MongoDB  
+- **JWT** – Admin authentication  
+- **bcrypt** – Password hashing  
+- **dotenv** – Environment configuration  
+- **CORS** – Cross-origin resource sharing
+
+---
+
+## 🌐 API Endpoints
+
+### 📥 Public Routes
+
+- `GET /products`  
+  Fetch all available clothing items.
+
+- `GET /products/:_id`  
+  Fetch full details of a specific product by ID.
+
+---
+
+### 🔐 Admin Routes (JWT Protected)
+
+> All admin routes require a valid JWT token and are secured via `authenticateAdmin` middleware.
+
+- `POST /admin/login`  
+  Admin login, returns JWT token.
+
+- `GET /admin/products`  
+  Fetch all products (including reserved/sold).
+
+- `GET /products/:_id`  
+  Fetch a single product (admin access).
+
+- `POST /admin/create`  
+  Add a new clothing item to the database.
+
+- `PUT /admin/edit/:_id`  
+  Edit an existing product.
+
+- `PUT /admin/reserve/:_id`  
+  Mark a product as reserved.
+
+- `DELETE /admin/delete/:_id`  
+  Delete a product from the database.
+
+---
+
+## 🔐 Authentication
+
+- Admin credentials are verified on login via the `/admin/login` endpoint.
+- On successful login, a **JWT token** is returned and must be included in the `Authorization` header for all protected routes:
+
+---
+
+## 🚀 To-Do – Version 2.0
+
+Planned backend upgrades for future releases:
+
+- Add order and checkout endpoints
+- Integrate with a payment provider (e.g., Stripe)
+- Build shopping cart and purchase flow support
+
+---
+
+## 🔗 Project Resources
+
+- [🖼️ Wireframes & UI Flow](https://richiscouses.my.canva.site/lezie#home)  
+- [🗂️ Trello Planning Board](https://trello.com/b/QqDnmPn8/le-zie)
