@@ -29,17 +29,23 @@ const getById = async (req, res) => {
 };
 const createProduct = async(req, res) => {
     try {
-        const product = await Product.create(
-            { 
+        const product = await Product.create({ 
             name: req.body.name, 
             description: req.body.description,
             categories: req.body.categories,
+            colors: req.body.colors,
             size: req.body.size,
-            image: req.body.image,
-            precio: req.body.precio
-            }
-        );
-        await product.save();
+            images: req.body.images,
+            decade: req.body.decade,
+            brand: req.body.brand,
+            price: req.body.price,
+            discount: req.body.discount,
+            season: req.body.season,
+            sold: req.body.sold
+        });
+        if (!product) {
+            return res.status(400).json({ message: "Product not created" });
+        }
         res.status(201).json(product);
     } catch (error) {
         console.error(error);

@@ -7,7 +7,8 @@ const ProductSchema = new mongoose.Schema({
         trim: true 
     },
     description: { 
-        type: String, 
+        type: String,
+        required: true, 
         trim: true 
     },
     categories: { 
@@ -29,8 +30,7 @@ const ProductSchema = new mongoose.Schema({
         required: true
     },
     decade: {
-        type: String,
-        required: true
+        type: Number,
     },
     brand: {
         type: String,
@@ -40,6 +40,12 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 0
+    },
+    discount: {
+        type: Number,
+        min: 0,
+        max: 100,
+        default: 0
     },
     season: {
         type: String,

@@ -86,3 +86,4 @@ Planned backend upgrades for future releases:
 
 - [🖼️ Wireframes & UI Flow](https://richiscouses.my.canva.site/lezie#home)  
 - [🗂️ Trello Planning Board](https://trello.com/b/QqDnmPn8/le-zie)
+- [📬 Postman](https://documenter.getpostman.com/view/41161776/2sB2cX91qN)
