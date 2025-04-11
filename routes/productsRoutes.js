@@ -11,7 +11,7 @@ router.get('/admin/products', authenticateAdmin, getProducts)
 router.get('/products/:_id', authenticateAdmin, getById)
 router.post('/admin/create', authenticateAdmin, createProduct) // Add a new item to the DB
 router.put('/admin/edit/:_id', authenticateAdmin, editProduct) // Edit a product from the DB
-router.put('/admin/reserve/:_id', authenticateAdmin, soldProduct) // Mark a product as reserved
+router.put('/admin/sold/:_id', authenticateAdmin, soldProduct) // Mark a product as reserved
 router.delete('/admin/delete/:_id', authenticateAdmin, deleteProduct) // Delete a product from the DB
 
 module.exports = router;
