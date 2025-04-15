@@ -1,6 +1,6 @@
-# 🧵 LE ZIE - Vintage Clothing Web App – Backend
+# 🧵 LE ZIE - Vintage Clothing Web App 1.0 – Backend
 
-This is the **backend** for the LE ZIE vintage clothing web application, built with **Node.js**, **Express**, and **MongoDB**. It provides a set of API endpoints for both public users and authenticated admins, supporting full inventory management and dynamic content delivery to the frontend.
+This is the **backend** for the LE ZIE vintage clothing web application, built with **Node.js**, **Express**, **MongoDB** and **MailerLite**. It provides a set of API endpoints for both public users and authenticated admins, supporting full inventory management and dynamic content delivery to the frontend.
 
 ---
 
@@ -8,7 +8,7 @@ This is the **backend** for the LE ZIE vintage clothing web application, built w
 
 - Store and manage vintage clothing items in a MongoDB database
 - Public API to fetch all or individual products
-- Admin-only routes to add, edit, delete, or reserve items
+- Admin-only routes to add, edit, delete, or mark as sold items
 - Secure JWT authentication system for admin login and protected access
 
 ---
@@ -19,10 +19,12 @@ This is the **backend** for the LE ZIE vintage clothing web application, built w
 - **Express.js** – Backend framework  
 - **MongoDB** – NoSQL database  
 - **Mongoose** – ODM for MongoDB  
-- **JWT** – Admin authentication  
-- **bcrypt** – Password hashing  
-- **dotenv** – Environment configuration  
-- **CORS** – Cross-origin resource sharing
+- **JWT (jsonwebtoken)** – Token-based authentication  
+- **bcrypt** – Secure password hashing  
+- **dotenv** – Environment variable management  
+- **CORS** – Cross-origin resource sharing  
+- **axios** – Promise-based HTTP client  
+- **crypto** – Built-in module for cryptographic operations 
 
 ---
 
@@ -36,6 +38,9 @@ This is the **backend** for the LE ZIE vintage clothing web application, built w
 - `GET /products/:_id`  
   Fetch full details of a specific product by ID.
 
+- `POST /api/subscribe`  
+  Subscription to the newsletter. Handling of the subscribers through MailerLite.
+
 ---
 
 ### 🔐 Admin Routes (JWT Protected)
@@ -45,20 +50,14 @@ This is the **backend** for the LE ZIE vintage clothing web application, built w
 - `POST /admin/login`  
   Admin login, returns JWT token.
 
-- `GET /admin/products`  
-  Fetch all products (including reserved/sold).
-
-- `GET /products/:_id`  
-  Fetch a single product (admin access).
-
 - `POST /admin/create`  
   Add a new clothing item to the database.
 
 - `PUT /admin/edit/:_id`  
   Edit an existing product.
 
-- `PUT /admin/reserve/:_id`  
-  Mark a product as reserved.
+- `PUT /admin/sold/:_id`  
+  Mark a product as sold.
 
 - `DELETE /admin/delete/:_id`  
   Delete a product from the database.
@@ -77,7 +76,7 @@ This is the **backend** for the LE ZIE vintage clothing web application, built w
 Planned backend upgrades for future releases:
 
 - Add order and checkout endpoints
-- Integrate with a payment provider (e.g., Stripe)
+- Integrate with a payment provider (Mainly Twint and Paypal)
 - Build shopping cart and purchase flow support
 
 ---

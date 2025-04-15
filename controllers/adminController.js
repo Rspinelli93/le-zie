@@ -11,12 +11,12 @@ const getAdmin = async (req, res) => {
         const SECRET_KEY = process.env.JWT_SECRET;
 
         if (email !== ADMIN_EMAIL) {
-            return res.status(401).json({ message: "Unauthorized: Invalid email" });
+            return res.status(401).json({ message: "Unauthorized: Invalid email 😖" });
         }
 
         const isPasswordValid = await bcrypt.compare(password, ADMIN_HASHED_PASSWORD);
         if (!isPasswordValid) {
-            return res.status(401).json({ message: "Unauthorized: Invalid password" });
+            return res.status(401).json({ message: "Unauthorized: Invalid password 😖" });
         }
 
         const token = jwt.sign({ email }, SECRET_KEY, { expiresIn: "1h" });

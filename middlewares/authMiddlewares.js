@@ -10,7 +10,7 @@ const authenticateAdmin = (req, res, next) => {
     }
 
     if (!token) {
-        return res.status(403).json({ message: "Access denied. No token provided." });
+        return res.status(403).json({ message: "Access denied. No token provided 🔑" });
     }
     try {
         const SECRET_KEY = process.env.JWT_SECRET;
@@ -18,7 +18,7 @@ const authenticateAdmin = (req, res, next) => {
         req.admin = decoded;
         next();
     } catch (error) {
-        return res.status(401).json({ message: "Invalid or expired token" });
+        return res.status(401).json({ message: "Invalid or expired token 🔑" });
     }
 };
 

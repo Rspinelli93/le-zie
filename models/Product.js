@@ -26,7 +26,7 @@ const ProductSchema = new mongoose.Schema({
         trim: true,
     },
     images: {
-        type: [String], // Array of image URLs or paths
+        type: [String],
         required: true
     },
     decade: {
