@@ -81,6 +81,12 @@ Planned backend upgrades for future releases:
 
 ---
 
+## 🔗 Link to Frontdend Repo
+
+- [FrontEnd](https://github.com/Rspinelli93/le-zie-front)
+
+---
+
 ## 🔗 Project Resources
 
 - [🖼️ Wireframes & UI Flow](https://richiscouses.my.canva.site/lezie#home)  
